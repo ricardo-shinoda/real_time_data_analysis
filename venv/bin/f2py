@@ -1,4 +1,4 @@
-#!/home/ricardo/code/real_time_data_analysis/venv/bin/python3
+#!/Users/ricardo.shinoda/study/real_time_data_analysis/venv/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys
