@@ -1,51 +1,43 @@
-#!/usr/bin/env python3
-# This is going to be the place where I fetch the information from the api
-
 import matplotlib.pyplot as plt
 from datetime import datetime
 import yfinance as yf
-import numpy as np
 import pandas as pd
-import matplotlib
-matplotlib.use('Qt5Agg')
 
+# Ticker symbol
+ticker_symbols = ['PETR4.SA', 'SNAG11.SA', 'KLBN11.SA']
+ticker_symbol = 'KLBN11.SA'  # Change to the desired ticker symbol
 
-petro = yf.Ticker('petr4.sa')
-snag11 = yf.Ticker('snag11.sa')
-klabin = yf.Ticker('klbn11.sa')
+# Fetch ticker data
+ticker = yf.Ticker(ticker_symbol)
+stock_info = ticker.info
 
-ticker = klabin
-
-stockInfo = ticker.info
-
-
-for key, value in stockInfo.items():
+# Printing stock info
+for key, value in stock_info.items():
     print(key, ":", value)
 
-# numbShares = petro.info['sharesOutstanding']
-# currentPrice = snag11.info['currentPrice']
-# print('The number of share are: ', numbShares)
-# print('The Current Price per stock is:', currentPrice)
+# Print dividends
+print('Dividends:', ticker.dividends)
 
-# to check the dividends
-print(ticker.dividends)
+# Print current price
+print('Current Price:', stock_info['currentPrice'])
 
-print('Current Price:', stockInfo['currentPrice'])
-# To know who the major holders are
-print(ticker.major_holders)
+# Print major holders
+print('Major Holders:', ticker.major_holders)
 
-# To know who the institutions are
-print(ticker.institutional_holders)
+# Print institutional holders
+print('Institutional Holders:', ticker.institutional_holders)
 
-df = petro.dividends
-data = df.resample('Y').sum()
-data = data.reset_index()
-
+# Get dividend data and plot
+df = ticker.dividends
+data = df.resample('Y').sum().reset_index()
 data['Year'] = data['Date'].dt.year
+
 plt.figure()
 plt.bar(data['Year'], data['Dividends'])
 plt.ylabel('Dividend Yield ($)')
 plt.xlabel('Year')
-plt.title(f'{ticker.info["symbol"]} dividend history')
-plt.xlim(2014, 2022)
+plt.title(f'{ticker_symbol} Dividend History')
+plt.xlim(2010, 2024)
+plt.grid(True, linestyle='--', alpha=0.5)
+plt.tight_layout()
 plt.show()
