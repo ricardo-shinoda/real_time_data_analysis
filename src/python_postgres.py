@@ -1,41 +1,42 @@
 import psycopg2
+from decouple import config
 
-
-conn = None
 cur = None
+conn = None
+
+user = config('user')
+password = config('password')
+host = config('host')
+port = config('port')
+database = config('database')
 
 try:
-
     conn = psycopg2.connect(
-        user="postgres",
-        password="3136",
-        host="localhost",
-        port="5432",
-        database="postgres"
-    )
+        user=user,
+        password=password,
+        host=host,
+        port=port,
+        database=database)
 
     cur = conn.cursor()
 
-    # Creating a table on Postgres
-    create_script = ''' CREATE TABLE IF NOT EXISTS stock_dividends (
-        ticker varchar (50),
-        date varchar(50),
+    create_script = ''' CREATE TABLE IF NOT EXISTS dividends (
+        ticker varchar(100),
+        date DATE PRIMARY KEY,
         dividends REAL NOT NULL,
-        year INT NOT NULL
-    ) '''
+        year INT NOT NULL)'''
 
     cur.execute(create_script)
 
-    # Manually inserting values into a table
-    insert_script = ''' INSERT INTO stock_dividends
-        (ticker, date, dividends, year) VALUES (%s, %s, %s, %s)'''
+    insert_script = 'INSERT INTO dividends (ticker, date, dividends, year) VALUES (%s, %s, %s, %s)'
+    insert_values = [("SNAG11", "2023-12-30", 30, 2023),
+                     ("PETR4", "2022-12-29", 31, 2022)]
 
-    insert_values = ('SNAG11', '2023-12-31', 32, 2023)
-    cur.execute(insert_script, insert_values)
+    cur.executemany(insert_script, insert_values)
 
     conn.commit()
 except Exception as error:
-    print('Error: ', error)
+    print('Error:', error)
 
 finally:
     if cur is not None:
