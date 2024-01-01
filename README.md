@@ -1,6 +1,36 @@
-This repository is dedicated to Data Engineering study.
-This is my first Data engineering project.
+# Project Title
 
-The goal here is to develop a real-time data analysis pipeline: Build a real-time data analysis pipeline that processes and analyzes large volumes of streaming data, such as financial brazilian market data.
+This project is intented to develop my Data Engineering skills.
 
-This project would involve designing efficient data ingestion, processing, and storage mechanisms, as well as developing machine learning algorithms for real-time data analysis.
+## Overview
+
+I this project I get stock information from yfinance api, treat and then send it to a database in PostgreSQL.
+
+## Features
+
+The key features for this project are:
+- Fetching financial data using yfinance API.
+- Treat the data, like sumarize by year.
+- Storing data in a Postgres database.
+
+## Prerequisites
+
+Specify any prerequisites or dependencies required to run your project. For example:
+- Python 3.x
+- yfinance library
+- Postgres database
+
+## Installation
+
+Provide instructions on how to install and set up your project. Include any necessary steps, commands, or configuration files. For example:
+```bash
+pip install -r requirements.txt
+``````
+
+## configuration
+
+## Usage
+
+## Database Schema
+
+
