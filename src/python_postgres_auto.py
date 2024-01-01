@@ -5,6 +5,7 @@ import yfinance as yf
 cur = None
 conn = None
 
+# Get credentials save in a non shared file
 user = config('user')
 password = config('password')
 host = config('host')
@@ -24,6 +25,7 @@ df = ticker.dividends
 data = df.resample('Y').sum().reset_index()
 data['Year'] = data['Date'].dt.year
 
+# Make connection to database
 try:
     conn = psycopg2.connect(
         user=user,
@@ -34,6 +36,7 @@ try:
 
     cur = conn.cursor()
 
+    # Create table if not exist
     create_script = ''' CREATE TABLE IF NOT EXISTS dividends_auto (
         date DATE PRIMARY KEY,
         dividends REAL NOT NULL,
@@ -47,6 +50,7 @@ except Exception as error:
 try:
     insert_script = 'INSERT INTO dividends_auto (date, dividends, year) VALUES (%s, %s, %s)'
 
+    # Get all the dividends and sum by year
     for index, row in data.iterrows():
         values = (row['Date'], row['Dividends'], row['Year'])
         cur.execute(insert_script, values)

@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 import yfinance as yf
 import pandas as pd
+import psycopg2
+from psycopg2 import Error
 
 # Ticker symbol
 ticker_symbols = ['PETR4.SA', 'SNAG11.SA', 'KLBN11.SA']
