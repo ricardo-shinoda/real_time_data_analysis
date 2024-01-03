@@ -18,28 +18,28 @@ for key, value in stock_info.items():
     print(key, ":", value)
 
 # Print dividends
-print('Dividends:', ticker.dividends)
+# print('Dividends:', ticker.dividends)
 
-# Print current price
-print('Current Price:', stock_info['currentPrice'])
+# # Print current price
+# print('Current Price:', stock_info['currentPrice'])
 
-# Print major holders
-print('Major Holders:', ticker.major_holders)
+# # Print major holders
+# print('Major Holders:', ticker.major_holders)
 
-# Print institutional holders
-print('Institutional Holders:', ticker.institutional_holders)
+# # Print institutional holders
+# print('Institutional Holders:', ticker.institutional_holders)
 
-# Get dividend data and plot
-df = ticker.dividends
-data = df.resample('Y').sum().reset_index()
-data['Year'] = data['Date'].dt.year
+# # Get dividend data and plot
+# df = ticker.dividends
+# data = df.resample('Y').sum().reset_index()
+# data['Year'] = data['Date'].dt.year
 
-plt.figure()
-plt.bar(data['Year'], data['Dividends'])
-plt.ylabel('Dividend Yield ($)')
-plt.xlabel('Year')
-plt.title(f'{ticker_symbol} Dividend History')
-plt.xlim(2010, 2024)
-plt.grid(True, linestyle='--', alpha=0.5)
-plt.tight_layout()
-plt.show()
+# plt.figure()
+# plt.bar(data['Year'], data['Dividends'])
+# plt.ylabel('Dividend Yield ($)')
+# plt.xlabel('Year')
+# plt.title(f'{ticker_symbol} Dividend History')
+# plt.xlim(2010, 2024)
+# plt.grid(True, linestyle='--', alpha=0.5)
+# plt.tight_layout()
+# plt.show()

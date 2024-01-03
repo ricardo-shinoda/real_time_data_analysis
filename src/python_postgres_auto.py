@@ -14,7 +14,7 @@ database = config('database')
 
 # Ticker symbol
 ticker_symbols = ['PETR4.SA', 'SNAG11.SA', 'KLBN11.SA']
-ticker_symbol = 'KLBN11.SA'  # Change to the desired ticker symbol
+ticker_symbol = 'PETR4.SA'  # Change to the desired ticker symbol
 
 # Fetch ticker data
 ticker = yf.Ticker(ticker_symbol)
@@ -37,7 +37,7 @@ try:
     cur = conn.cursor()
 
     # Create table if not exist
-    create_script = ''' CREATE TABLE IF NOT EXISTS dividends_auto (
+    create_script = ''' CREATE TABLE IF NOT EXISTS dividends_auto2 (
         date DATE PRIMARY KEY,
         dividends REAL NOT NULL,
         year INT NOT NULL)'''
@@ -48,7 +48,7 @@ except Exception as error:
     print('Error:', error)
 
 try:
-    insert_script = 'INSERT INTO dividends_auto (date, dividends, year) VALUES (%s, %s, %s)'
+    insert_script = 'INSERT INTO dividends_auto2 (date, dividends, year) VALUES (%s, %s, %s)'
 
     # Get all the dividends and sum by year
     for index, row in data.iterrows():
