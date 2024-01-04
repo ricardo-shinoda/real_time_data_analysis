@@ -1,0 +1,3 @@
+ERROR:root:An error occurred: duplicate key value violates unique constraint "dividends_auto_pkey"
+DETAIL:  Key (date)=(2023-12-31) already exists.
+
